@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Clockwork\Support\Psr\Middleware;
+use Clockwork\Support\Vanilla\Clockwork as VanillaClockwork;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;
@@ -42,6 +44,19 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - $app->pipe('/api', $apiMiddleware);
     // - $app->pipe('/docs', $apiDocMiddleware);
     // - $app->pipe('/files', $filesMiddleware);
+
+    /**
+     * install Clockwork middleware
+     *
+     * Note:
+     *  - The Clockwork class needs to be patched to include isEnabled().
+     *  - The Middleware class is copied.
+     */
+    $clockwork = $container->get(VanillaClockwork::class);
+    if ($clockwork->isEnabled()) {
+        require_once __DIR__ . '/../public/Middleware.php';
+        $app->pipe($container->get(Middleware::class));
+    }
 
     // Register the routing middleware in the middleware pipeline.
     // This middleware registers the Mezzio\Router\RouteResult request attribute.
