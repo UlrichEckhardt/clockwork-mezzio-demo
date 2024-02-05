@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.21.1@8c473e2437be8b6a8fd8f630f0f11a16b114c494">
+  <file src="src/App/ConfigProvider.php">
+    <UnusedClass>
+      <code>ConfigProvider</code>
+    </UnusedClass>
+  </file>
+  <file src="src/App/Handler/HomePageHandler.php">
+    <MixedInferredReturnType>
+      <code>ResponseInterface</code>
+    </MixedInferredReturnType>
+    <UndefinedClass>
+      <code>ContainerBuilder</code>
+      <code>LaminasRouter</code>
+      <code>MinimalContainer</code>
+      <code>PHPDIContainer</code>
+    </UndefinedClass>
+    <UnusedProperty>
+      <code>$template</code>
+    </UnusedProperty>
+  </file>
   <file src="test/AppTest/Handler/PingHandlerTest.php">
     <MixedArgument>
       <code>$json</code>
